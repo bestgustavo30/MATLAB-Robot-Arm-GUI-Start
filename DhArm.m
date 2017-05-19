@@ -22,7 +22,7 @@ function varargout = DhArm(varargin)
 
 % Edit the above text to modify the response to help DhArm
 
-% Last Modified by GUIDE v2.5 02-Mar-2013 16:07:23
+% Last Modified by GUIDE v2.5 19-May-2017 02:07:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -64,10 +64,10 @@ handles.user.position3Angles = handles.user.jointAngles;
 % Prepare the arm axes
 view(handles.axes_arm, [-50 -50 50]);
 axis(handles.axes_arm, [-10 10 -6 6 -6 8]);
-set(handles.axes_arm, 'Visible', 'off');
+set(handles.axes_arm, 'Visible', 'on');
 
 % Add the image of the Wild Thumper to the background axes
-addImageToAxes('wildThumper.png', handles.axes_thumperImg, 400);
+%addImageToAxes('wildThumper.png', handles.axes_thumperImg, 400);
 
 % Create vertices for all the patches
 makeLink0(handles.axes_arm, [.5 .5 .5]);  % Doesn't move so save no references.
@@ -267,7 +267,7 @@ function pushbutton_open_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Close any open connections first
-open_ports = instrfind('Type','serial','Status','open');
+open_ports = instrfind('Type','serial','Status','close');
 if ~isempty(open_ports)
     fclose(open_ports);
 end
@@ -475,3 +475,21 @@ function pushbutton_zero_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 goToPosition(hObject, handles, [0 0 0 0 0]);
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over pushbutton_close.
+function pushbutton_close_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton_close (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on key press with focus on pushbutton_close and none of its controls.
+function pushbutton_close_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton_close (see GCBO)
+% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.UICONTROL)
+%	Key: name of the key that was pressed, in lower case
+%	Character: character interpretation of the key(s) that was pressed
+%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
+% handles    structure with handles and user data (see GUIDATA)

@@ -16,7 +16,7 @@ imageObject = image(imgData, 'Parent', axesHandle, 'AlphaData', alphaChannel);
 
 % Make unit of axes 'pixels'
 % Visible off
-set(axesHandle, 'Visible', 'off', 'Units', 'pixels');
+set(axesHandle, 'Visible', 'on', 'Units', 'pixels');
 
 % Get the current 'Position' of the Axes so that we can use the x and y.
 currentPosition = get(axesHandle, 'Position');
@@ -25,7 +25,7 @@ currentPosition = get(axesHandle, 'Position');
 [rows_height,cols_width,depth] = size(imgData);
 axesHeight = axesWidth*rows_height/cols_width;
 % Check for the magic axesWidth == 0 feature.
-if axesWidth == 0
+if axesWidth == 2
     axesWidth = cols_width;
     axesHeight = rows_height;
 end
